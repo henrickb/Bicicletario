@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- icons -->
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+        <!-- css -->
+        <link rel="stylesheet" href="../views/styles/index.css" />
+
+        <title>Leaf Wheel</title>
+    </head>
+    <body>
+        <nav>
+            <a href="#"><img src="../images/logo.svg" alt="logo" /></a>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Cadastro</a></li>
+            </ul>
+        </nav>
+        <div class="app">
+            <div class="top-table">
+                <p>Cadastro de Bicicletas</p>
+                <button id="newBike" onclick="modalShow('create')">
+                    Nova bicicleta
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Status</td>
+                        <td>Marca</td>
+                        <td>Cor</td>
+                        <td>Data de Cadastro</td>
+                        <td>Data de Atualização</td>
+                        <td>Ações</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0000-0000</td>
+                        <td>Disponível</td>
+                        <td>Caloi</td>
+                        <td>Azul</td>
+                        <td>20/06/2023</td>
+                        <td>24/06/2023</td>
+                        <td>
+                            <i
+                                onclick="modalShow('edit')"
+                                class="ph-light ph-pencil-simple-line"
+                            ></i>
+                            <i
+                                onclick="modalShow('delete')"
+                                class="ph-light ph-trash"
+                            ></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="modal" id="create-bike-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span
+                            id="modal-btn-close-icon"
+                            class="close"
+                            onclick="modalHide()"
+                            >&times;</span
+                        >
+                        <p>Criar nova bicicleta</p>
+                    </div>
+                    <div class="content-wrapper">
+                        <div class="input-wrapper">
+                            <div class="modal-input">
+                                <p>Marca</p>
+                                <input
+                                    type="text"
+                                    placeholder="Informe a marca"
+                                />
+                            </div>
+                            <div class="modal-input">
+                                <p>Cor</p>
+                                <input
+                                    type="text"
+                                    placeholder="Informe a cor"
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-buttons">
+                            <input type="submit" value="Criar" />
+                            <input
+                                id="modal-btn-close"
+                                type="button"
+                                value="Cancelar"
+                                onclick="modalHide()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" id="edit-bike-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span
+                            id="modal-btn-close-icon"
+                            class="close"
+                            onclick="modalHide()"
+                            >&times;</span
+                        >
+                        <p>Editar bicicleta</p>
+                    </div>
+                    <div class="content-wrapper">
+                        <div class="input-wrapper">
+                            <div class="modal-input">
+                                <p>Marca</p>
+                                <input
+                                    type="text"
+                                    placeholder="Informe a marca"
+                                />
+                            </div>
+                            <div class="modal-input">
+                                <p>Cor</p>
+                                <input
+                                    type="text"
+                                    placeholder="Informe a cor"
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-buttons">
+                            <input type="submit" value="Criar" />
+                            <input
+                                id="modal-btn-close"
+                                type="button"
+                                value="Cancelar"
+                                onclick="modalHide()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" id="delete-bike-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span
+                            id="modal-btn-close-icon"
+                            class="close"
+                            onclick="modalHide()"
+                            >&times;</span
+                        >
+                        <p>Deletar bicicleta?</p>
+                    </div>
+                    <div class="content-wrapper">
+                        <div class="modal-buttons">
+                            <input type="submit" value="Confirmar" />
+                            <input
+                                id="modal-btn-close"
+                                type="button"
+                                value="Cancelar"
+                                onclick="modalHide()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../views/scripts/main.js"></script>
+    </body>
+</html>
