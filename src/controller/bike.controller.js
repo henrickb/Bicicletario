@@ -1,14 +1,10 @@
-import BikeServices from '../services/bike.services.js'
+import BikeServices from '../services/bike.service.js'
 
 const create = async (req, res) =>{
 
     try{
-      const {cod_bike, marca_bike, cor_bike} = req.body
-      if(!cod_bike ||!marca_bike ||!cor_bike){
-          res.status(400).send({
-            message: 'Submit all fields for registration'
-         }).end()
-      }
+      const {marca_bike, cor_bike, categoria_bike, tamanho_bike} = req.body
+      
    
       const bike = await BikeServices
       .createService(req.body)
@@ -21,12 +17,13 @@ const create = async (req, res) =>{
       }
    
       res.status(201).send({
-          message: 'Bicicleta created',
-         user: {
+         message: 'Bicicleta created',
+         bike: {
             id: bike._id,
-            cod_bike, 
             marca_bike, 
-            cor_bike
+            cor_bike,
+            categoria_bike,
+            tamanho_bike
          }
        }).end()
       } catch(err){
@@ -54,18 +51,77 @@ const findAll = async (req, res)=>{
    }
 }
 
-const findByCategory = async (req, res)=>{
-   try{
-      const bikes = BikeServices.findByCategory()
-      
+const  findByCategory = async (req, res)=>{
+    try{
+      const {category} = req.params 
+      console.log(category)
+      const bike = await BikeServices.findByCategory(category)
+      console.log(bike)
+      if(bike.length === 0)
+      {
+         return res.status(400).send({
+            message: 'There are no category bikes'
+         }).end()
+      }
+      res.status(200).json(bike).end()
+
    } catch(err){
       res.status(500).send({
          message: err.message
       }).end()
    }
 } 
+const update = async (req, res) =>{
+   try {
+      const {categoria_bike} = req.body
+      const {id} = req.params
+      console.log(id)
+      if(!categoria_bike){
+          res.status(400).send({
+            message: 'Submit at least one field for update'
+         })
+      } 
+      await BikeServices.updateService(
+         id,
+         categoria_bike,
+      )
+    res.send({message: 'Biker successfully update!'})
+   } catch (err){
+      res.status(500).send({
+         messege: err.message
+      })
+   }
+}
+
+const Delete = async (req, res) => {
+   try {
+      const biker = req.params.id
+
+      const bikeRemovida = await BikeServices.findByIdAndRemove(biker)
+      
+      console.log(bikeRemovida)
+
+      if (bikeRemovida) {
+         res.status(200).send({
+            message: 'Bike deleted successfully',
+            biker: bikeRemovida
+         })
+      } else {
+         res.status(404).send({
+            message: 'Bike not found not found'
+         })
+      }
+   } catch (err) {
+      res.status(500).send({
+         message: err.message
+      })
+   }
+}
 
 export default {
    create,
    findAll,
+   findByCategory,
+   update,
+   Delete
 }

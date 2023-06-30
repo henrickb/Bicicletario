@@ -7,4 +7,8 @@ routeBike.post('/', bikeController.create)
 
 routeBike.get('/', bikeController.findAll)
 
+routeBike.get('/:category', bikeController.findByCategory)
+
+routeBike.patch('/:id', bikeController.update)
+
 export default  routeBike

@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const BikeSchema = new mongoose.Schema({
-    cod_bike: {
-        type: String,
-        required: true,
-    },
     marca_bike: {
         type: String,
         required: true,
@@ -12,7 +8,14 @@ const BikeSchema = new mongoose.Schema({
     cor_bike: {
         type: String,
         required: true,
-        unique: true,
+    },
+    categoria_bike: {
+        type: String, // GRANDE|MEDIO|PEQUENO
+        required: true,
+    },
+    tamanho_bike:{
+        type: Number, 
+        required: true,
     }
 })
 

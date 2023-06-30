@@ -1,11 +1,13 @@
 import express from 'express'
 import connectDatabase from './src/database/db.js'
-import routeBike from './src/route/bike.route.js'
+import routeBike from './src/route/Bike.route.js'
+import userRoute from './src/route/User.route.js'
 const port = 5000
 const app = express()
 
 connectDatabase()
 app.use(express.json())
+app.use('/user', userRoute)
 app.use('/bike', routeBike)
 
 app.listen(port, () => {console.log(`Server running on port ${port}`)})
