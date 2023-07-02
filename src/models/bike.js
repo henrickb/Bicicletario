@@ -16,6 +16,9 @@ const BikeSchema = new mongoose.Schema({
     tamanho_bike:{
         type: Number, 
         required: true,
+    },
+    status:{
+        type: String
     }
 })
 

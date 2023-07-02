@@ -11,4 +11,7 @@ routeBike.get('/:category', bikeController.findByCategory)
 
 routeBike.patch('/:id', bikeController.update)
 
-export default  routeBike
+export default 
+{
+    routeBike
+} 

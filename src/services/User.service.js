@@ -1,4 +1,4 @@
-import User from '../models/User.js'
+import User from '../models/user.js'
 
 const createService = (body) => User.create(body) // this way a `return` is not necessary => desta maneira não é necessário um `return`
 
@@ -14,12 +14,10 @@ const updateService = (
     username,
     email,
     password,
-    avatar,
-    background
 ) => 
   User.findOneAndUpdate(
     {_id: id}, 
-    {id,name,username,email,password,avatar,background}
+    {id,name,username,email,password}
   )
 
 export default 

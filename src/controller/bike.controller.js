@@ -3,7 +3,7 @@ import BikeServices from '../services/bike.service.js'
 const create = async (req, res) =>{
 
     try{
-      const {marca_bike, cor_bike, categoria_bike, tamanho_bike} = req.body
+      const {marca_bike, cor_bike, categoria_bike, tamanho_bike, status} = req.body
       
    
       const bike = await BikeServices
@@ -23,7 +23,8 @@ const create = async (req, res) =>{
             marca_bike, 
             cor_bike,
             categoria_bike,
-            tamanho_bike
+            tamanho_bike,
+            status
          }
        }).end()
       } catch(err){

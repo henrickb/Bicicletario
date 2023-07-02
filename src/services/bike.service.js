@@ -1,4 +1,4 @@
-import Bike from '../models/Bike.js'
+import Bike from '../models/bike.js'
 
 const createService = (body) => Bike.create(body) // this way a ´return´ is not necessary => desta maneira não é necessário um `return`
 

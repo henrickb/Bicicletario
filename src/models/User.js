@@ -21,6 +21,12 @@ const UserSchema = new mongoose.Schema({
     },
     compras: {
         type: Array
+
+    },
+    password: {
+        type: Number,
+        require: true,
+        unique: false
     }
 })
 
