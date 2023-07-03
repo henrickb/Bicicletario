@@ -1,10 +1,11 @@
-import UserService from '../services/User.service.js'
+import userService from "../services/user.service.js"
+
 
 const create = async (req, res) =>{
 
  try{
-   const {name, phone, email, altura} = req.body
-   if(!name ||!phone ||!email ||!altura){
+   const {name, phone, email, altura, password} = req.body
+   if(!name ||!phone ||!email ||!altura || !password){
        res.status(400).send({
          message: 'Submit all fields for registration'
       })
@@ -56,8 +57,7 @@ const findAll = async (req, res) => {
 
 const findById = async (req, res) =>{
    try{
-      const user = req.user
-      res.send(user)
+      res.status(200).json(req.user).end()
    } catch(err){
       res.status(500).send({
          message: err.message
@@ -67,42 +67,37 @@ const findById = async (req, res) =>{
 
 const update = async (req, res) =>{
    try {
-      const {name, phone, email, altura} = req.body
+      const {altura} = req.body
    
-      if(!name && !phone && !email && !altura){
+      if(!altura){
           res.status(400).send({
             message: 'Submit at least one field for update'
          })
       } 
-      const {id, user} = req
-      await userService.updateService(
-         id,
-         name,
-         phone,
-         email,
-         altura,
+      
+      const user = UserService.updateService(
+         req.user[0]._id,    
+         altura
       )
-    res.send({message: 'User successfully update!'})
+
+      if(user){
+         res.status(201).json({message: 'User successfully update!'}).end()
+      }
+    
    } catch (err){
       res.status(500).send({
          messege: err.message
-      })
+      }).end()
    }
 }
 
 const Delete = async (req, res) => {
    try {
-      const user = req.params.id
-
-      const usuarioRemovido = await UserService.findByIdAndRemove(user)
-      
-      console.log(usuarioRemovido)
-
-      if (usuarioRemovido) {
-         res.status(200).send({
-            message: 'Usuário deletado com sucesso',
-            usuario: usuarioRemovido
-         })
+      const usuarioRemovido = await UserService.findByIdAndRemove(req.user[0]._id)
+       if (usuarioRemovido) {
+         res.status(200).json({
+            message: 'Usuário deletado com sucesso'
+         }).end()
       } else {
          res.status(404).send({
             message: 'Usuário não encontrado'
@@ -115,6 +110,27 @@ const Delete = async (req, res) => {
    }
 }
 
+const purchase = async (req, res) =>{
+   try{
+      
+      const buy = await userService.purchaseById(
+         req.params.id,
+         req.user[0]._id
+      )
+      if(buy){
+         res.status(200).json(buy).end()
+      }
+
+   }catch(err){
+      res.status(500).send({
+         message: err.message
+      })
+   }
+   
+
+
+}
+
 
 export default { 
    create, 
@@ -122,4 +138,5 @@ export default {
    findById,
    update,
    Delete,
+   purchase,
 }

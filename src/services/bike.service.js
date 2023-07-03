@@ -16,7 +16,6 @@ const updateService = (
         )
 
 export default {
-
     createService,
     findAllService,
     findByCategory,

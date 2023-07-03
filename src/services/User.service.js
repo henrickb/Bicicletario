@@ -8,18 +8,18 @@ const findByIdService = (id) => User.findById(id)
 
 const findByIdAndRemove = (id) => User.findByIdAndRemove(id)
 
+const purchaseById = (idBike, idUser)=> {
+  User.find({id: idUser})
+  
+}
+
 const updateService = (
     id,
-    name,
-    username,
-    email,
-    password,
-    avatar,
-    background
+    alturaInfo,
 ) => 
   User.findOneAndUpdate(
     {_id: id}, 
-    {id,name,username,email,password,avatar,background}
+    {altura: alturaInfo}
   )
 
 export default 
@@ -29,4 +29,5 @@ export default
     findByIdService,
     updateService,
     findByIdAndRemove,
+    purchaseById
 }

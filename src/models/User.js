@@ -4,6 +4,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    password: {
+        type: String,
+        required: true,
+        unique: false,
+    },
     phone: {
         type: Number,
         required: true,
@@ -18,9 +23,6 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         require: true,
 
-    },
-    compras: {
-        type: Array
     }
 })
 
